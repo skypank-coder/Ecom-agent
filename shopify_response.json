@@ -1,0 +1,87 @@
+{
+  "product": {
+    "id": 7978477027427,
+    "title": "A Light in the Attic",
+    "body_html": "<p>A Light in the Attic is a classic collection of poetry and drawings from Shel Silverstein. This special edition celebrates its 20th anniversary and is sure to amuse readers of all ages. With its humorous and creative verse, it's a must-have for anyone who loves poetry.</p><ul>\n<li>Special edition</li>\n<li>20th anniversary</li>\n<li>Humorous and creative verse</li>\n<li>Poetry and drawings by Shel Silverstein</li>\n</ul>",
+    "vendor": "EcomAgent",
+    "product_type": "Imported Product",
+    "created_at": "2026-03-14T18:24:28-04:00",
+    "handle": "a-light-in-the-attic-1",
+    "updated_at": "2026-03-14T18:24:29-04:00",
+    "published_at": "2026-03-14T18:24:28-04:00",
+    "template_suffix": null,
+    "published_scope": "global",
+    "tags": "ai-generated, ecom-agent",
+    "status": "active",
+    "admin_graphql_api_id": "gid://shopify/Product/7978477027427",
+    "variants": [
+      {
+        "id": 44056761106531,
+        "product_id": 7978477027427,
+        "title": "Default Title",
+        "price": "51.77",
+        "position": 1,
+        "inventory_policy": "deny",
+        "compare_at_price": null,
+        "option1": "Default Title",
+        "option2": null,
+        "option3": null,
+        "created_at": "2026-03-14T18:24:29-04:00",
+        "updated_at": "2026-03-14T18:24:29-04:00",
+        "taxable": true,
+        "barcode": null,
+        "fulfillment_service": "manual",
+        "grams": 0,
+        "inventory_management": null,
+        "requires_shipping": true,
+        "sku": null,
+        "weight": 0.0,
+        "weight_unit": "lb",
+        "inventory_item_id": 46146249261155,
+        "inventory_quantity": 0,
+        "old_inventory_quantity": 0,
+        "admin_graphql_api_id": "gid://shopify/ProductVariant/44056761106531",
+        "image_id": null
+      }
+    ],
+    "options": [
+      {
+        "id": 10308416602211,
+        "product_id": 7978477027427,
+        "name": "Title",
+        "position": 1,
+        "values": [
+          "Default Title"
+        ]
+      }
+    ],
+    "images": [
+      {
+        "id": 35458874867811,
+        "alt": null,
+        "position": 1,
+        "product_id": 7978477027427,
+        "created_at": "2026-03-14T18:24:29-04:00",
+        "updated_at": "2026-03-14T18:24:29-04:00",
+        "admin_graphql_api_id": "gid://shopify/MediaImage/26994011242595",
+        "width": 318,
+        "height": 395,
+        "src": "https://cdn.shopify.com/s/files/1/0666/9985/3923/files/fe72f0532301ec28892ae79a629a293c_72a7f388-6861-4cc2-821c-88ce07ba46a5.jpg?v=1773527069",
+        "variant_ids": []
+      }
+    ],
+    "image": {
+      "id": 35458874867811,
+      "alt": null,
+      "position": 1,
+      "product_id": 7978477027427,
+      "created_at": "2026-03-14T18:24:29-04:00",
+      "updated_at": "2026-03-14T18:24:29-04:00",
+      "admin_graphql_api_id": "gid://shopify/MediaImage/26994011242595",
+      "width": 318,
+      "height": 395,
+      "src": "https://cdn.shopify.com/s/files/1/0666/9985/3923/files/fe72f0532301ec28892ae79a629a293c_72a7f388-6861-4cc2-821c-88ce07ba46a5.jpg?v=1773527069",
+      "variant_ids": []
+    }
+  }
+}
