@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcomAgent - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-top: 10px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+        }
+
+        input::placeholder {
+            color: #b0b0b0;
+        }
+
+        .import-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .import-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .import-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-text {
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+
+        .result {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .product-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            color: #4ade80;
+            margin-bottom: 20px;
+        }
+
+        .shopify-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #95a5a6 0%, #7f8c8d 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .shopify-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .error {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .retry-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="/logout" class="logout-btn">Logout</a>
+        <div class="logo">🤖 EcomAgent</div>
+        <div class="tagline">Import any product to your Shopify store</div>
+    </div>
+
+    <div class="card" id="import-form">
+        <form id="importForm" onsubmit="return false;">
+            <div class="form-group">
+                <label for="supplier_url">Supplier Product URL</label>
+                <input type="url" id="supplier_url" name="supplier_url" placeholder="https://any-supplier.com/product/..." required>
+            </div>
+
+            <button type="button" class="import-btn" onclick="importProduct()">Import Product</button>
+        </form>
+    </div>
+
+    <div class="status" id="progress-section">
+        <div class="spinner"></div>
+        <div class="status-text" id="progress-msg">Agent is working...</div>
+    </div>
+
+    <div class="result" id="result-card">
+        <img id="result-image" class="product-image" src="" alt="Product Image">
+        <div class="product-name" id="result-name"></div>
+        <div class="product-price" id="result-price"></div>
+        <div class="product-desc" id="result-desc"></div>
+        <a id="view-shopify-btn" class="shopify-btn" href="#" target="_blank">View on Shopify</a>
+        <button class="retry-btn" onclick="importAnother()">Import Another</button>
+    </div>
+
+    <div class="error" id="error-msg" style="display: none;"></div>
+
+    <script>
+        // Check if we have credentials, redirect to setup if not
+        window.addEventListener('load', async function() {
+            try {
+                const response = await fetch('/status');
+                const data = await response.json();
+                if (data.status !== 'ok') {
+                    window.location.href = '/setup';
+                }
+            } catch(e) {
+                // Network error - might be server not ready yet
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            }
+        });
+
+        async function importProduct() {
+            const url = document.getElementById('supplier_url').value;
+            if (!url) {
+                alert('Please enter a product URL');
+                return;
+            }
+
+            // Show progress, hide form
+            document.getElementById('import-form').style.display = 'none';
+            document.getElementById('progress-section').style.display = 'block';
+            document.getElementById('result-card').style.display = 'none';
+
+            const steps = [
+                'Opening supplier page...',
+                'Capturing product data...',
+                'AI extracting details...',
+                'Publishing to Shopify...',
+                'Done!'
+            ];
+            let stepIndex = 0;
+
+            // Step 1: Start the job
+            const response = await fetch('/import-product', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({supplier_url: url})
+            });
+            const data = await response.json();
+
+            if (!data.success) {
+                showError(data.error);
+                return;
+            }
+
+            const jobId = data.job_id;
+
+            // Step 2: Rotate progress messages while polling
+            const msgInterval = setInterval(() => {
+                if (stepIndex < steps.length - 1) stepIndex++;
+                document.getElementById('progress-msg').textContent = 
+                    steps[stepIndex];
+            }, 4000);
+
+            // Step 3: Poll for job completion
+            const pollInterval = setInterval(async () => {
+                try {
+                    const poll = await fetch(`/job-status/${jobId}`);
+                    const status = await poll.json();
+
+                    if (status.status === 'done') {
+                        clearInterval(pollInterval);
+                        clearInterval(msgInterval);
+                        showResult(status.result);
+                    } else if (status.status === 'error') {
+                        clearInterval(pollInterval);
+                        clearInterval(msgInterval);
+                        showError(status.error);
+                    }
+                } catch(e) {
+                    clearInterval(pollInterval);
+                    clearInterval(msgInterval);
+                    showError('Network error. Please try again.');
+                }
+            }, 2000);
+        }
+
+        function showResult(result) {
+            document.getElementById('progress-section').style.display = 'none';
+            document.getElementById('result-card').style.display = 'block';
+            document.getElementById('result-image').src = result.image_url;
+            document.getElementById('result-name').textContent = result.product_name;
+            document.getElementById('result-price').textContent = result.price;
+            document.getElementById('result-desc').textContent = result.description;
+            document.getElementById('view-shopify-btn').href = result.shopify_url;
+        }
+
+        function showError(msg) {
+            document.getElementById('progress-section').style.display = 'none';
+            document.getElementById('import-form').style.display = 'block';
+            document.getElementById('error-msg').textContent = msg;
+            document.getElementById('error-msg').style.display = 'block';
+        }
+
+        function importAnother() {
+            document.getElementById('result-card').style.display = 'none';
+            document.getElementById('import-form').style.display = 'block';
+            document.getElementById('supplier_url').value = '';
+            document.getElementById('error-msg').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
