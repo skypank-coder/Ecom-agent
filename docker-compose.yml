@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  ecomagent:
+    build: .
+    container_name: ecomagent
+    ports:
+      - "5000:5000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONIOENCODING=utf-8
+      - PYTHONUTF8=1
+      - FLASK_ENV=production
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - SHOPIFY_STORE_URL=${SHOPIFY_STORE_URL}
+      - SHOPIFY_ACCESS_TOKEN=${SHOPIFY_ACCESS_TOKEN}
+    volumes:
+      - ./src:/app/src
+      - ./templates:/app/templates
+      - ./.env:/app/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5000/status')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
